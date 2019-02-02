@@ -1,0 +1,33 @@
+//var crtoken = params.usrnme+params.pwd+tme+'Glocal';
+		//console.log(crtoken);
+
+//var dbtoken = 'SELECT COALESCE(usrnme, \'\') || COALESCE(time, \'\') FROM DUMMY WHERE USRNME = \'abc\'';
+
+/*
+	create:function(params,callback){
+		knex(tableName).insert(params).asCallback(function(err,response){
+			if(err){
+				console.log(err);
+				return callback({exception:error.insert.insertUnsuccessful})
+			}else{
+				return callback(null);
+			}
+		});
+	},
+*/
+
+//console.log(query);
+		//var check = knex.raw('select TOKEN from LOGIN where TOKEN = ?', [combo]);		
+
+		
+
+		//knex.raw(usr).asCallback(function(err,response) {console.log(response); return callback(null,response); });
+
+			//knex(tableName).where(retrieveParams).pluck('TOKEN').asCallback(function(err,response) {console.log(response); return callback(null,response); });
+
+
+//console.log(params.usrnme);
+			//retrieveParams.PWD=params.pwd;
+			
+			//knex(tableName).where(retrieveParams).asCallback(function(err,response) {console.log(response); return callback(null,response); });
+//}
