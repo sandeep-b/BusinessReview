@@ -1,0 +1,122 @@
+
+  <div class="container"> 
+   <div class="row">
+     <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+
+       <div align="middle">
+        <img src="img/logo.jpg" >
+      </div>
+
+      <div class="panel panel-primary" style="margin-top:5%">
+        <div class="panel-heading" style="text-align:center">
+          Sign Up for Glocal
+        </div>
+
+        <div class="panel-body">
+          <div style="text-align:center"> <b> Already to Glocal? </b> <a ui-sref="login"> Login </a> </div>
+
+          <form role="signup-form" name="signupform" method="post" novalidate ng-submit="vm.signup(user)">
+
+
+            <div class="form-group" ng-class="{'has-error': signupform.firstName.$invalid && !signupform.firstName.$pristine}">
+             <label for="firstName"> First Name </label>
+             <input type="text" name="firstName" placeholder="First Name" class="form-control input-lg" required ng-model="user.firstName">
+
+               <div class="help-block text-danger" ng-if="signupform.firstName.$invalid && !signupform.firstName.$pristine" role="alert" ng-messages="signupform.firstName.$error">
+                  <div ng-message="pattern">First Name is required.</div>
+               </div>
+
+           </div>
+
+           
+
+            <div class="form-group" ng-class="{'has-error': signupform.lastName.$invalid && !signupform.lastName.$pristine}">
+             <label for="lastName"> Last Name </label>
+             <input type="text" name="lastName" placeholder="Last Name" class="form-control input-lg" required ng-model="user.lastName">
+
+              <div class="help-block text-danger" ng-if="signupform.lastName.$invalid && !signupform.lastName.$pristine" role="alert" ng-messages="signupform.lastName.$error">
+                  <div ng-message="pattern">Last Name is required.</div>
+               </div>
+
+           </div>
+
+
+           <div class="form-group" ng-class="{'has-error': signupform.email.$invalid && !signupform.email.$pristine}">
+             <label for="email"> Email </label>
+             <input type="email" name="email" placeholder="Email" class="form-control input-lg" required ng-pattern="/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/" ng-model="user.email">
+
+             <div class="help-block text-danger" ng-if="signupform.email.$invalid && !signupform.email.$pristine" role="alert" ng-messages="signupform.email.$error">
+                  <div ng-message="pattern">Email is required.</div>
+               </div>
+
+           </div>
+
+           
+
+
+           <div class="form-group" ng-class="{'has-error': signupform.password.$invalid && !signupform.password.$pristine}">
+             <label for="password"> Password </label>
+             <input type="password" name="password" placeholder="Password" class="form-control input-lg" required ng-model="user.password">
+
+              <div class="help-block text-danger" ng-if="signupform.password.$invalid && !signupform.password.$pristine" role="alert" ng-messages="signupform.password.$error">
+                  <div ng-message="pattern">Password is required.</div>
+               </div>
+
+           </div>
+
+          
+
+           <div class="form-group" ng-class="{'has-error': signupform.typeUser.$invalid && !signupform.typeUser.$pristine}">
+
+            <label for="typeUser"> User Type</label>  
+
+            <select class="form-control input-lg" name="typeUser" id="typeUser" ng-model="user.typeUser" ng-options="rolesDataValue.UserTypeId as rolesDataValue.UserTypeName  for rolesDataValue in vm.roles" required>
+            </select>     
+            
+
+            <div class="help-block text-danger" ng-if="signupform.typeUser.$invalid && !signupform.typeUser.$pristine" role="alert" ng-messages="signupform.typeUser.$error">
+                  <div ng-message="pattern">Choose the type of User.</div>
+            </div>
+
+
+          </div>
+
+          <div class="form-group" ng-class="{'has-error': signupform.city.$invalid && !signupform.city.$pristine}">
+             <label for="city"> City </label>
+             <input type="text" name="city" placeholder="City" class="form-control input-lg" required ng-model="user.city">
+
+              <div class="help-block text-danger" ng-if="signupform.city.$invalid && !signupform.city.$pristine" role="alert" ng-messages="signupform.city.$error">
+                  <div ng-message="pattern">City is required.</div>
+
+               </div>
+
+           </div>
+
+          <div class="form-group" ng-class="{'has-error': signupform.state.$invalid && !signupform.state.$pristine}">
+           <label for="state"> State </label>
+
+            <select class="form-control input-lg" name="state" id="state" ng-model="user.state" ng-options="statesDataValue.DROP_OPTION as statesDataValue.DROP_OPTION  for statesDataValue in vm.states" required>
+
+              <div class="help-block text-danger" ng-if="signupform.state.$invalid && !signupform.state.$pristine" role="alert" ng-messages="signupform.state.$error">
+                  <div ng-message="pattern">State is required.</div>
+
+               </div>
+
+            </select>
+         </div>
+
+
+           <div class="form-actions">
+                  <button type="submit" class="btn btn-lg btn-success btn-block" ng-disabled="signupform.$invalid">Register</button>
+            </div>
+
+        </form>
+
+           </div>
+
+         </div>
+
+         
+       </div>
+     </div>
+   </div>

@@ -1,0 +1,52 @@
+{
+  "name": "BoilerPlate-Shubham",
+  "version": "0.0.1",
+  "authors": [
+    "Shubham Agiwal <shubhamagiwal92@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "description": "",
+  "main": "",
+  "homepage": "",
+  "devDependencies": {
+    "angular": "^1.5.6"
+  },
+  "dependencies": {
+    "angular-httpi": "*",
+    "angular": "^1.5.7",
+    "angular-bootstrap": "^1.3.3",
+    "jquery": "^3.0.0",
+    "angular-toastr": "^1.7.0",
+    "angular-ui-router": "^0.3.1",
+    "angular-cookies": "^1.5.6",
+    "angular-datatables": "^0.5.4",
+    "httpi": "git://github.com/bennadel/httpi.git",
+    "angular-animate": "^1.5.7",
+    "datatables": "^1.10.12",
+    "http": "^3.24.10",
+    "angular-material": "^1.0.9",
+    "angularjs-datepicker": "^2.1.6",
+    "angular-ui-bootstrap-datetimepicker": "^1.3.3",
+    "moment": "^2.14.0",
+    "angular-moment": "^0.10.3",
+    "ng-lodash": "^0.5.0",
+    "angular-route": "^1.6.3",
+    "angular-ui-bootstrap-fontawesome": "^0.3.0",
+    "angular-loading-bar": "^0.9.0",
+    "angularUtils-pagination": "angular-utils-pagination#^0.11.1",
+    "angular-chart.js": "^1.1.1",
+    "angular-password": "^1.0.3",
+    "angular-validation-match": "^1.9.0",
+    "ng-flow": "^2.7.4",
+    "ng-file-upload": "^12.2.13",
+    "ngmap": "^1.18.4",
+    "angular-tags": "^0.2.10"
+  }
+}

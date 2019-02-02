@@ -1,0 +1,178 @@
+   <div>
+   	<div class="row">
+   		<div class="col-md-12 col-xs-12 col-sm-12">
+   			<nav class="navbar navbar-absolute navbar-default">
+
+               <div class="container-fluid">
+
+                  <div class="navbar-header">
+                     <a ui-sref="userDashboard" class="navbar-left navbar-brand"><img src="img/logo.jpg" height="30px"></a>
+                  </div>
+
+                  <div>
+
+                    <ul class="nav navbar-nav">
+                <li> <a ng-click="vm.searchResultsAPI(vm.Tags.Restaurants,vm,null)"  > Restaurants </a> </li>
+                <li> <a ng-click="vm.searchResultsAPI(vm.Tags.NightLife,vm,null)"> Night Life </a> </li>
+                <li> <a ng-click="vm.searchResultsAPI(vm.Tags.Shopping,vm,null)"> Shopping </a> </li>
+                <li> <a ng-click="vm.tupleCount()"> Tuple Count </a> </li>
+                <li></li>
+        </ul> 
+
+              <form class="navbar-form navbar-left" id="navbar-form" ng-keypress="($event.charCode==13)?vm.searchByKeyword(keyword):return">
+                <div class="form-group">
+
+                  <div class="input-group col-xs-9 col-sm-9">
+                    <input type="text" class="form-control" placeholder="Find" aria-describedby="basic-addon1" ng-model="keyword" >
+
+                    <span class="input-group-addon" id="basic-addon1">
+                      <a ng-click="vm.searchByKeyword(keyword)">
+                        <span class="glyphicon glyphicon-search"></span>
+                      </a>
+                    </span>
+                  </div>
+                </div>
+              </form>
+
+                     <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                           <a class="dropdown-toggle" data-toggle="dropdown">
+                            {{vm.userDetails.FirstName+" "+vm.userDetails.LastName}}<span class="caret" style="color:white"></span>
+                          </a>
+                          <ul class="dropdown-menu">
+                           <li><a ng-click="vm.goToProfilePage()">About Me</a></li>
+                           <li><a ui-sref="settings">Settings</a></li>
+                           <li ng-if="vm.userDetailsLocalStorage.User_Type_Id==2">
+                              <a ng-click="vm.businessAPI()" class="dashboard-link">Business Details</a>
+                           </li>
+                           <li><a ng-click="vm.logout()">Log out</a></li>
+                        </ul>
+                     </li>
+                  </ul> 
+
+               </div>
+            </div>
+         </nav>
+      </div>
+   </div>
+
+   <div class="row">
+      <div class="col-md-offset-1 col-md-5 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-10">
+         <div class="panel panel-info">
+            <div class="panel-heading" style="text-align:center" > Profile Update</div>
+            <div class="panel-body">
+
+            <div flow-init flow-file-added=" vm.flowUpload($file, $event, $flow)">
+               <img ng-src="{{vm.userDetails.ImageURL || '../../../img/noImage.png' }}" flow-btn class="img-responsive center-block" width="100px" height="100px">
+            </div>
+              
+
+              <div>
+                  <label for="Email"> Email</label>
+                  <input type="text" class="form-control" placeholder="{{vm.userDetails.Email}}" name="email"type="email" ng-disabled="true">
+               </div>
+              
+              <form role="settingsForm" name="settingsForm" novalidate method="put">
+
+               <div class="form-group" ng-class="{'has-error': settingsForm.firstName.$invalid && !loginForm.firstName.$pristine}">
+                  <label for="FirstName"> First Name</label>
+                  <input type="text" class="form-control" placeholder="{{vm.userDetails.FirstName}}" name="firstName" type="firstName" ng-model="vm.userDetails.FirstName" required>
+
+                     <div class="help-block text-danger" ng-if="settingsForm.firstName.$invalid && !settingsForm.firstName.$pristine" role="alert" ng-messages="settingsForm.firstName.$error">
+                        <div ng-message="pattern">First Name is required.</div>
+                    </div>
+
+               </div>
+
+               <div class="form-group" ng-class="{'has-error': settingsForm.lastName.$invalid && !settingsForm.lastName.$pristine}">
+                  <label for="LastName"> Last Name</label>
+                  <input type="text" class="form-control" placeholder="{{vm.userDetails.LastName}}" name="lastName" type="lastName" ng-model="vm.userDetails.LastName" required>
+
+                   <div class="help-block text-danger" ng-if="settingsForm.lastName.$invalid && !settingsForm.lastName.$pristine" role="alert" ng-messages="settingsForm.lastName.$error">
+                        <div ng-message="pattern">Last Name is required.</div>
+                    </div>
+               </div>
+
+
+               <div class="form-group" ng-class="{'has-error': settingsForm.City.$invalid && !settingsForm.City.$pristine}">
+                  <label for="City"> City </label> 
+
+                   <input type="text" class="form-control" placeholder="{{vm.userDetails.City}}" name="City" type="City" ng-model="vm.userDetails.City" required>
+
+                   <div class="help-block text-danger" ng-if="settingsForm.City.$invalid && !settingsForm.City.$pristine" role="alert" ng-messages="settingsForm.City.$error">
+                        <div ng-message="pattern">City is required.</div>
+                    </div>
+
+                </select>
+             </div>
+
+             <div class="form-group">
+                <label for="Country"> State </label>
+                <select class="form-control" name="State" id="State" ng-model="vm.userDetails.State" ng-options="statesDataValue.DROP_OPTION as statesDataValue.DROP_OPTION  for statesDataValue in vm.statesData">
+                   <option value=""></option>
+                </select>
+             </div>
+
+             <div class="form-actions" style="text-align:center">
+              <button type="submit" class="btn btn-lg btn-success" ng-disabled="settingsForm.$invalid" ng-click="vm.updateUserDetails(vm.userDetails)">Save Changes
+              </button>
+
+              <button type="submit" class="btn btn-lg btn-danger" ng-disabled="settingsForm.$invalid" ng-click="vm.loadPreviousDetails()">Cancel
+
+              </button>
+
+           </div>
+
+        </form>
+
+     </div>
+  </div>
+</div>
+
+<div class="col-md-offset-1 col-md-4 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-10">
+   <div class="panel panel-info">
+      <div class="panel-heading" style="text-align:center" > Change password </div>
+
+      <div class="panel-body">
+        
+        <form role="passwordForm" name="passwordForm" novalidate method="put" > 
+         <div class="form-group" ng-class="{'has-error': passwordForm.oldPassword.$invalid && !passwordForm.oldPassword.$pristine}">
+          <label for="Change Password"> New Password </label>
+          <input type="password" class="form-control" ng-model="password.new" placeholder="******" name="oldPassword" type="password"  data-ng-class="{'ng-invalid':passwordForm.confirmPassword.$error.match}" required>
+
+          <div class="help-block text-danger" ng-if="passwordForm.oldPassword.$invalid && !passwordForm.oldPassword.$pristine" role="alert" ng-messages="passwordForm.oldPassword.$error">
+                <div ng-message="pattern">New Password is required.</div>
+          </div>
+
+         </div>
+
+       <div class="form-group" ng-class="{'has-error': passwordForm.confirmPassword.$invalid && !passwordForm.confirmPassword.$pristine}">
+         <label for="Change Password"> Confirm Password </label>
+         <input type="password" class="form-control" placeholder="******" name="confirmPassword" type="password" ng-model="password.confirm" data-match="password.new" required>
+
+         <!--  <div class="help-block text-danger" ng-if="passwordForm.confirmPassword.$invalid && !passwordForm.confirmPassword.$pristine" role="alert" ng-messages="passwordForm.confirmPassword.$error">
+                <div ng-message="pattern">Confirm Password is required.</div>
+          </div> -->
+
+          <div data-ng-show="passwordForm.confirmPassword.$error.match" class="help-block text-danger"  ng-message="pattern">Passwords do not match!</div>
+
+       </div>
+
+
+       <div class="form-actions" style="text-align:center">
+              <button type="submit" class="btn btn-lg btn-success" ng-disabled="passwordForm.$invalid" ng-click="vm.updatePassword(password)">Save Changes
+              </button>
+
+              <button type="submit" class="btn btn-lg btn-danger" ng-disabled="passwordForm.$invalid" ng-click="vm.clearPasswordFields()">Cancel
+       </div>
+
+   </form>
+
+
+</div>
+
+</div>
+</div>
+
+</div> 
+</div>

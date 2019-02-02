@@ -1,0 +1,11 @@
+[
+  {
+    "description": "Testcases for the login feature Basic ui check",
+    "assertions": [
+      {
+        "passed": true
+      }
+    ],
+    "duration": 3371
+  }
+]

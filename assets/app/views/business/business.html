@@ -1,0 +1,276 @@
+
+	<div class="col-md-12 col-xs-12 col-sm-12">
+
+		<div class="row">
+			<div class="col-md-12 col-xs-12 col-sm-12">
+				<nav class="navbar navbar-absolute navbar-default">
+
+					<div class="container">
+
+						<div class="navbar-header">
+							<a ui-sref="userDashboard" class="navbar-left navbar-brand"><img src="img/logo.jpg" height="30px"></a>
+						</div>
+
+						<div>
+							<ul class="nav navbar-nav">
+								<li> <a ng-click="vm.searchResultsAPI(vm.Tags.Restaurants,vm,null)"  > Restaurants </a> </li>
+								<li> <a ng-click="vm.searchResultsAPI(vm.Tags.NightLife,vm,null)"> Night Life </a> </li>
+								<li> <a ng-click="vm.searchResultsAPI(vm.Tags.Shopping,vm,null)"> Shopping </a> </li>
+								<li> <a ng-click="vm.tupleCount()"> Tuple Count </a> </li>
+								<!-- <li> <a ng-click="vm.resetFilters()"> Reset Search </a> </li> -->
+							</ul> 
+
+							<form class="navbar-form navbar-left" id="navbar-form" ng-keypress="($event.charCode==13)?vm.searchByKeyword(keyword):return">
+								<div class="form-group">
+
+									<div class="input-group col-xs-9 col-sm-9">
+										<input type="text" class="form-control" placeholder="Find" aria-describedby="basic-addon1" ng-model="keyword" >
+
+										<span class="input-group-addon" id="basic-addon1">
+											<a ng-click="vm.searchByKeyword(keyword)">
+												<span class="glyphicon glyphicon-search"></span>
+											</a>
+										</span>
+									</div>
+								</div>
+							</form>
+
+							<ul class="nav navbar-nav navbar-right">
+								<li class="dropdown">
+									<a class="dropdown-toggle" data-toggle="dropdown" >
+										{{vm.userName}}<span class="caret" style="color:white"></span>
+									</a>
+									<ul class="dropdown-menu">
+										<li><a ng-click="vm.goToProfilePage()">About Me</a></li>
+       									<li><a ui-sref="settings">Settings</a></li>
+       									<li ng-if="vm.userDetails.User_Type_Id==2">
+											<a ng-click="vm.businessAPI()" class="dashboard-link">Business Details</a>
+										</li>
+										<li><a ng-click="vm.logout()">Log out</a></li>
+									</ul>
+								</li>
+							</ul> 
+						</div>
+					</div>
+				</nav>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-4 col-xs-12 col-sm-12">
+				<h1> {{vm.business.Business_Name}}</h1>
+			</div>
+
+			<div class=" col-md-offset-2 col-md-2 col-xs-12 col-sm-7">
+				<a ui-sref="writeReview({id:vm.business.Business_Id})">
+					<h1>
+						<button type="submit" class="btn btn-success btn-lg">
+							<span class="glyphicon glyphicon-star"></span>
+							Write a Review
+						</button>
+					</h1>
+				</a>
+			</div>
+
+			<div class="col-md-2 col-md-offset-1 col-xs-12 col-sm-offset-1 col-sm-4" ng-if="vm.reviewDetails.length>0">
+				<a ng-click="vm.businessAnalyticsModalForm()">
+					<h1>
+						<button type="submit" class="btn btn-info btn-lg">
+							<i class="fa fa-bar-chart" aria-hidden="true"></i>
+							Ratings distribution
+						</button>
+					</h1>
+				</a>
+			</div>
+		</div>
+
+		<div class="row">
+
+			<div class=" col-md-5 col-xs-12 col-sm-12">
+				<fontawesomestar ratingvalue="vm.business.Rating>0?vm.business.Rating:1" max="5"></fontawesomestar>
+				{{vm.business.CountReviews}} Reviews
+			</div>	
+		</div>
+
+		<br>
+		<div class="row">
+			<div class="col-md-5 col-xs-12 col-sm-12">
+				<fontawesomedollar ratingvalue="vm.business.Price_Range>0?vm.business.Price_Range:1" max="5"></fontawesomedollar>
+				<span ng-if="vm.business.Tags.length>0" ng-repeat="tags in vm.business.Tags">{{tags.TagName}} &nbsp; &nbsp;</span>
+				<span ng-if="vm.business.Tags.length<=0"><b>No Tags Applied</b></span>
+			</div>	
+		</div>
+
+		<br>
+
+		<div class="row">
+			<div class="col-md-5 col-xs-12 col-sm-12">
+				<div class="panel panel-info">
+					<div class="panel-heading" style="text-align:center">Details</div>
+					<div class="panel-body">
+						<i class="fa  fa-map-marker fa-lg " aria-hidden="true"></i>
+						<span ng-if="vm.business.Address_Line">{{vm.business.Address_Line}},</span>
+						<span ng-if="vm.business.City">&nbsp;{{vm.business.City}}</span>
+						<span ng-if="vm.business.State">&nbsp;{{vm.business.State}}-</span>
+						<span ng-if="vm.business.Zip">{{vm.business.Zip}}</span>
+						<br>
+						<br>
+						<i class="fa fa-mobile-phone fa-lg " aria-hidden="true"></i>
+						<span ng-if="vm.business.Phone">{{vm.business.Phone}}</span>
+						<span ng-if="!vm.business.Phone">No Contact Details Available</span>
+						<br>
+						<br>
+						<i class="fa fa-location-arrow fa-lg " aria-hidden="true"></i>
+						<a ng-href="vm.business.Website" ng-if="vm.business.Website"> {{vm.business.Website}}</a>
+						<span ng-if="!vm.business.Website">No Website Available</span>
+					</div>
+				</div>
+
+				<h4>Location</h4>
+				<ng-map zoom="15" center="{{vm.coords}}">
+    			<marker position="{{vm.coords}}"
+      icon="https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png">
+    			</marker>
+  				</ng-map>
+
+			</div>
+
+			<div class="col-md-offset-1 col-md-5 col-xs-12 col-sm-12">
+				<div class="text-center">
+					<img ng-src="{{vm.business.Image_Url || './img/splash_background_img_2.jpg'}}" class="img-thumbnail">
+				</div>
+			</div>	
+		</div>
+
+		<div class="row">
+			<br>
+			<div class="col-md-8 col-xs-12 col-sm-12" >
+				<div class="text-left" style="font-size:20px" ng-if="vm.reviewDetails.length>0"><b>Recommended Reviews for {{vm.business.Business_Name}}</b></div>
+				
+				<div class="form-group form-inline col-md-6 col-xs-12 col-sm-12" ng-if="vm.reviewDetails.length>0">
+					<div class="dropdown">
+  								<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">SORT
+ 							    <span class="caret"></span></button>
+  								<ul class="dropdown-menu">
+    								<li><a ng-model="vm.sortBy" ng-init="vm.sortBy=0" ng-click="vm.businessReviewsSortBy(0)">Newest First</a></li>
+    								<li><a ng-model="vm.sortBy" ng-init="vm.sortBy=1" ng-click="vm.businessReviewsSortBy(1)">Oldest First</a></li>
+    								<li><a ng-model="vm.sortBy" ng-init="vm.sortBy=2" ng-click="vm.businessReviewsSortBy(2)">Highest Rated</a></li>
+    								<li><a ng-model="vm.sortBy" ng-init="vm.sortBy=3" ng-click="vm.businessReviewsSortBy(3)">Lowest Rated</a></li>
+ 							    </ul>
+				    </div>
+				</div>
+
+				<div ng-hide="vm.reviewDetails.length<=0">
+					<div class="form-group form-inline" >
+
+					<div class="input-group col-md-6 col-xs-6 col-sm-6" >
+						<input type="text" class="form-control" placeholder="Find" aria-describedby="basic-addon1" ng-model="q" >
+
+						<span class="input-group-addon" id="basic-addon1">
+								<span class="glyphicon glyphicon-search"></span>
+						</span>
+					</div>
+				</div>
+
+				</div>
+				
+				
+
+				<div class="panel-group" >
+
+					<div class="panel panel-default" dir-paginate="review in vm.reviewDetails | filter:q | itemsPerPage:3 ">
+
+						<div class="panel-body">
+
+							<div class="col-md-4">
+								<img ng-src="{{review.Image_Url || 'img/dashboard_1.jpeg' }}" width="100px" height="100px" class="pull-left" style="margin: 0px 20px" align="middle" class="img-responsive">
+								<b><a ui-sref="profile({id:review.User_Id})">{{review.FullName}}</a></b>
+								<br>
+								<i class="fa fa-star-o fa-lg"></i><b>{{review.Review_Count}} reviews</b>
+								<br>
+								<b>{{review.City || ' ' ||review.State}}</b>
+							</div>
+
+							<div class="col-md-8">
+								<br>
+								<fontawesomestarsmall ratingvalue="review.Rating?review.Rating:1" max="5" ></fontawesomestarsmall>
+
+								<b>Date:</b>&nbsp;{{review.Creation_time | date:'yyyy-MM-dd'}}
+								<br>
+
+								<div class="text-justify">
+									{{review.Text}}
+								</div>
+
+								
+							</div>
+
+						</div>
+
+					</div>
+				</div>
+
+				
+
+			</div>
+			
+			<div class="col-md-4 col-sm-12 col-xs-12">
+				<div class="panel-group" >
+				  <div class="panel panel-primary" ng-if="vm.TextTags.length>0">
+					<div class="panel-heading text-center">More business info</div>
+					<div class="panel-body" >
+					
+					<div ng-repeat="textTags in vm.TextTags">
+						<b>{{textTags.Attribute_Name}}:</b> {{textTags.Attribute_Value}}
+					    <br>
+					</div>		
+					
+					</div>
+				</div>
+
+				<div class="panel panel-primary" ng-if="vm.firstReviewer">
+					<div class="panel-heading text-center">First Reviewer</div>
+					<div class="panel-body">
+					<img ng-src="{{vm.firstReviewer.IMAGE_URL  || img/dashboard_1.jpeg }}" width="60px" height="60px" class="pull-left" style="margin: 0px 20px" align="middle" class="img-responsive">
+					<b><a ui-sref="profile({id:vm.firstReviewer.UserId})">{{vm.firstReviewer.FullName}}</a></b>
+					<br>
+					<i class="fa fa-star-o fa-lg"></i><b>{{vm.firstReviewer.countReviews}} Reviews</b>
+					</div>
+			   </div>
+
+			   <div class="panel panel-primary" ng-if="vm.Hours.length>0">
+					<div class="panel-heading text-center">Working Hours</div>
+					<div class="panel-body">
+
+						<div ng-repeat="hours in vm.Hours">
+							<b>{{hours.Day}}:</b> {{hours.Open_time}} to {{hours.Close_time}}
+					 		<br>
+						</div>
+					
+					</div>
+			   </div>		
+
+			  </div>
+		    </div>
+				
+
+		  <div class="row">
+
+		  	 <div class="col-xs-12 col-sm-12">
+		  	 	<nav class="text-center" aria-label="Page navigation">
+					<dir-pagination-controls boundary-links="true"></dir-pagination-controls>
+				</nav>
+		  	 </div>
+		      
+
+
+	     </div>
+
+           
+		</div>
+
+		
+
+	</div>
+
+

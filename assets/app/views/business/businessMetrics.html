@@ -1,0 +1,323 @@
+
+	<div class="col-md-12 col-xs-12 col-sm-12">
+
+		<div class="row">
+			<div class="col-md-12 col-xs-12 col-sm-12">
+				<nav class="navbar navbar-absolute navbar-default">
+
+				<div class="container-fluid">
+
+						<div class="navbar-header">
+							<a ui-sref="userDashboard" class="navbar-left navbar-brand"><img src="img/logo.jpg" height="30px"></a>
+						</div>
+
+						<div>
+							<ul class="nav navbar-nav">
+								<li> <a ng-click="vm.searchResultsAPI(vm.Tags.Restaurants,vm,null)"  > Restaurants </a> </li>
+								<li> <a ng-click="vm.searchResultsAPI(vm.Tags.NightLife,vm,null)"> Night Life </a> </li>
+								<li> <a ng-click="vm.searchResultsAPI(vm.Tags.Shopping,vm,null)"> Shopping </a> </li>
+								<li> <a ng-click="vm.resetFilters()"> Reset Search </a> </li>
+								<li> <a ng-click="vm.tupleCount()"> Tuple Count </a> </li>
+							</ul> 
+
+							<form class="navbar-form navbar-left" id="navbar-form" ng-keypress="($event.charCode==13)?vm.searchByKeyword(keyword):return">
+								<div class="form-group">
+
+									<div class="input-group col-xs-9 col-sm-9">
+										<input type="text" class="form-control" placeholder="Find" aria-describedby="basic-addon1" ng-model="keyword">
+
+										<span class="input-group-addon" id="basic-addon1">
+											<a ng-click="vm.searchByKeyword(keyword)">
+												<span class="glyphicon glyphicon-search"></span>
+											</a>
+										</span>
+									</div>
+								</div>
+							</form>
+
+							<ul class="nav navbar-nav navbar-right">
+								<li class="dropdown">
+									<a class="dropdown-toggle" data-toggle="dropdown" >
+										{{vm.userName}}<span class="caret" style="color:white"></span>
+									</a>
+									<ul class="dropdown-menu">
+										<li><a ng-click="vm.goToProfilePage()">About Me</a></li>
+										<li><a ui-sref="settings">Settings</a></li>
+										<li ng-if="vm.userDetails.User_Type_Id==2">
+											<a ng-click="vm.businessAPI()" class="dashboard-link">Business Details</a>
+										</li>
+										<li><a ng-click="vm.logout()">Log out</a></li>
+									</ul>
+								</li>
+							</ul> 
+						</div>
+					</div>
+				</nav>
+			</div>
+		</div>
+
+		<div class="container-fluid" style="background-color:#f5f5f5">
+			<div class="col-md-2 col-xs-12 col-sm-12">
+				<h4 class="text-justify">Restaurant</h4>
+				<a  class="text-center" ng-click="vm.searchResultsAPI(vm.Tags.American,vm,null)">American</a>
+				<br>
+				<a class="text-center" ng-click="vm.searchResultsAPI(vm.Tags.Chinese,vm,null)">Chinese</a>
+				<br>
+				<a class="text-center" ng-click="vm.searchResultsAPI(vm.Tags.Mexican,vm,null)">Mexican</a>
+				<br>
+				<a class="text-center" ng-click="vm.searchResultsAPI(vm.Tags.Indian,vm,null)">Indian</a>
+			</div>
+
+			<div class="col-md-2 col-xs-12 col-sm-12">
+				<h4 class="text-justify">Active Life</h4>
+				<a  class="text-center" ng-click="vm.searchResultsAPI(vm.Tags.ActiveLife,vm,null)">Active Life</a>
+				<br>
+				<a class="text-center" ng-click="vm.searchResultsAPI(vm.Tags.Golf,vm,null)">Golf</a>
+				<br>
+				<a class="text-center" ng-click="vm.searchResultsAPI(vm.Tags.Gym,vm,null)">Gym</a>
+				<br>
+				<a class="text-center" ng-click="vm.searchResultsAPI(vm.Tags.Yoga,vm,null)">Yoga</a>
+				<br>
+			</div>
+
+			<div class="col-md-2 col-xs-12 col-sm-12">
+				<h4 class="text-justify">Shopping</h4>
+				<a  class="text-center" ng-click="vm.searchResultsAPI(vm.Tags.Fashion,vm,null)">Fashion</a>
+				<br>
+				<a class="text-center" ng-click="vm.searchResultsAPI(vm.Tags.Bookstore,vm,null)">Bookstore</a>
+				<br>
+			</div>
+
+			<div class="col-md-2 col-xs-12 col-sm-12">
+				<h4 class="text-justify">Nightlife</h4>
+				<a class="text-center" ng-click="vm.searchResultsAPI(vm.Tags.Bar,vm,null)">Bar</a>
+				<br>
+				<a class="text-center" ng-click="vm.searchResultsAPI(vm.Tags.wineBar,vm,null)">Wine Bar</a>
+			</div>
+
+			<div class="col-md-2 col-xs-12 col-sm-12">
+				<h4 class="text-justify">Automotive</h4>
+				<a class="text-center" ng-click="vm.searchResultsAPI(vm.Tags.carWash,vm,null)">Car Wash</a>
+				<br>
+				<a class="text-center" ng-click="vm.searchResultsAPI(vm.Tags.gas,vm,null)">Gas & Service Station</a>
+				<br>
+				<a class="text-center" ng-click="vm.searchResultsAPI(vm.Tags.carDealer,vm,null)">Car Dealer</a>
+			</div>
+
+			<div class="col-md-2 col-xs-12 col-sm-12">
+				<h4 class="text-justify">Beauty & Spa</h4>
+				<a class="text-center" ng-click="vm.searchResultsAPI(vm.Tags.hairSalon,vm,null)">Hair Salon</a>
+				<br>
+				<a class="text-center" ng-click="vm.searchResultsAPI(vm.Tags.Tattoo,vm,null)">Tattoo</a>
+				<br>
+			</div>
+
+		</div>
+
+		<div class="container-fluid" style="background-color:#f5f5f5">
+			<br>
+			<div class="col-md-2 col-xs-12 col-sm-12">
+				<h4 class="text-justify">Price </h4>
+				<form name="myForm">
+
+					<div class="checkbox">
+						<label><input type="checkbox" value="1" ng-model="vm.priceRangeValue1.checked" ng-checked="vm.priceRangeValue1.checked"   ng-click="vm.searchResultsAPI(null,vm,null)"><span class="fa fa-usd"></span></label>
+						
+					</div>
+
+					<div class="checkbox">
+						<label><input type="checkbox" value="2" ng-model="vm.priceRangeValue2.checked" ng-checked="vm.priceRangeValue2.checked" ng-click="vm.searchResultsAPI(null,vm,null)"><span class="fa fa-usd"></span><span class="fa fa-usd"></span></label>
+					</div>
+
+					<div class="checkbox">
+						<label><input type="checkbox" value="3" ng-model="vm.priceRangeValue3.checked" ng-checked="vm.priceRangeValue3.checked" ng-click="vm.searchResultsAPI(null,vm,null)"><span class="fa fa-usd"></span><span class="fa fa-usd"></span><span class="fa fa-usd"></span></label>
+					</div>
+
+					<div class="checkbox">
+						<label><input type="checkbox" value="4" ng-model="vm.priceRangeValue4.checked" ng-checked="vm.priceRangeValue4.checked" ng-click="vm.searchResultsAPI(null,vm,null)"><span class="fa fa-usd"></span><span class="fa fa-usd"></span><span class="fa fa-usd"></span><span class="fa fa-usd"></span></label>
+					</div>
+
+				</form>
+
+			</div>
+
+				<div class="col-md-2 col-xs-12 col-sm-12">
+				<h4 class="text-justify">Sort By</h4>
+				<a class="text-center" ng-click="vm.searchResultsAPI(null,vm,2)">Highest Rated</a>
+				<br>
+				<a class="text-center" ng-click="vm.searchResultsAPI(null,vm,3)">Most Reviewed</a>
+				<br>
+			</div>
+
+			<div class="col-md-2 col-xs-12 col-sm-12">
+				<h4 class="text-justify">Other Tags</h4>
+				<a class="text-center" ng-click="vm.searchResultsAPI(vm.Tags.fastFood,vm,null)">Fast Food</a>
+				<br>
+				<a class="text-center" ng-click="vm.searchResultsAPI(vm.Tags.cafeteria,vm,null)">Cafeteria</a>
+				<br>
+				<a class="text-center" ng-click="vm.searchResultsAPI(vm.Tags.cafe,vm,null)">Cafe</a>
+				<br>
+				<a class="text-center" ng-click="vm.searchResultsAPI(vm.Tags.barbeque,vm,null)">Barbeque</a>
+				<br>
+			</div>
+
+
+			<div class="col-md-2 col-xs-12 col-sm-12">
+				<h4 class="text-justify">Other Tags</h4>
+				<a class="text-center" ng-click="vm.searchResultsAPI(vm.Tags.burger,vm,null)">Burger</a>
+				<br>
+				<a class="text-center" ng-click="vm.searchResultsAPI(vm.Tags.hotdog,vm,null)">Hot Dog</a>
+				<br>
+				<a class="text-center" ng-click="vm.searchResultsAPI(vm.Tags.pizza,vm,null)">Pizza</a>
+				<br>
+				<a class="text-center" ng-click="vm.searchResultsAPI(vm.Tags.salad,vm,null)">Salad</a>
+				<br>
+			</div>
+
+			<div class="col-md-2 col-xs-12 col-sm-12">
+				<h4 class="text-justify">Other Tags</h4>
+				<a class="text-center" ng-click="vm.searchResultsAPI(vm.Tags.danceStudio,vm,null)">Dance Studio</a>
+				<br>
+				<a class="text-center" ng-click="vm.searchResultsAPI(vm.Tags.museum,vm,null)">Museum</a>
+				<br>
+				<a class="text-center" ng-click="vm.searchResultsAPI(vm.Tags.cinema,vm,null)">Cinema</a>
+				<br>
+				<a class="text-center" ng-click="vm.searchResultsAPI(vm.Tags.realEstate,vm,null)">Real Estate</a>
+				<br>
+			</div>
+
+		</div>
+
+		<h2 class="text-center"> Business Metrics</h2>
+			<h3 class="text-center"> {{vm.businessMetrics.businessName}}</h3>
+
+		<div class="row">
+			
+
+			<div class="col-md-4 col-sm-12 col-xs-12" ng-if="vm.businessMetrics.ReviewYearlyDistribution.length>0"> 
+				<div class="text-center" style=" display: block;
+    			margin: 0 auto;">
+					<h4 class="text-center"> Review Distribution Yearly</h4>
+					<canvas id="base" class="chart-bar" char-colors="vm.linecolors" chart-data="vm.lineChartData"
+						chart-labels="vm.linelabels"
+						chart-dataset-override="vm.lineChartdatasetOverride">
+					</canvas>
+				</div>
+			</div>
+
+			<div class="col-md-4 col-sm-12 col-xs-12"> 
+				<div>
+					<h4 class="text-center"> Review Distribution Monthly for 2016</h4>
+					<canvas id="line" class="chart chart-line" chart-data="vm.lineChartData1"
+						chart-labels="vm.lineChartLabels1" chart-series="vm.lineSeries1" chart-options="vm.datasetOverrideLineChart1Options"
+						chart-dataset-override="vm.datasetOverrideLineChart1">
+					</canvas>
+				</div>
+			</div>
+
+			<div class="col-md-4 col-sm-12 col-xs-12" ng-if="vm.businessMetrics.ReviewDistribution.length>0"> 
+
+				<div class="text-center" style="height:200px;width:200px; display: block;
+    			margin: 0 auto;">
+					<h4 class="text-center"> Rating Distribution</h4>
+					<canvas id="doughnut" class="chart chart-doughnut"
+  					chart-data="vm.doughData" chart-labels="vm.doughLabels">
+					</canvas> 
+				</div>
+
+
+			</div>
+
+		</div>
+
+		<div class="row">
+
+			<div class="col-md-4 col-sm-12 col-xs-12"> 
+				<div>
+					<div class="panel panel-danger">
+
+ 						 <div class="panel-heading">
+    						<h3 class="panel-title text-center">Days Since the Last Review</h3>
+  						 </div>
+
+  						  <div class="panel-body text-center">
+   							<h1>{{vm.businessMetrics.DaysSinceLastReview.no_days_since_last_review}}</h1> 
+  						  </div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="col-md-4 col-sm-12 col-xs-12"> 
+				<div>
+					<div class="panel panel-info">
+
+ 						 <div class="panel-heading">
+    						<h3 class="panel-title text-center">Total Reviews</h3>
+  						 </div>
+
+  						  <div class="panel-body text-center">
+   							<h1>{{vm.businessMetrics.TotalReviews}}</h1> 
+  						  </div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-4 col-sm-12 col-xs-12"> 
+				<div>
+					<div class="panel panel-success">
+
+ 						 <div class="panel-heading">
+    						<h3 class="panel-title text-center">Unique Users Giving Reviews</h3>
+  						 </div>
+
+  						  <div class="panel-body text-center">
+   							<h1>{{vm.businessMetrics.UniqueUsersLogging}}</h1> 
+  						  </div>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+
+		<br>
+
+		
+		<div class="row">
+
+			<div class="col-md-4 col-sm-12 col-xs-12"> 
+				<div>
+					<div class="panel panel-info">
+
+ 						 <div class="panel-heading">
+    						<h3 class="panel-title text-center">In State Reviews</h3>
+  						 </div>
+
+  						  <div class="panel-body text-center">
+   							<h1>{{vm.businessMetrics.InStateReviews}}</h1> 
+  						  </div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="col-md-4 col-sm-12 col-xs-12"> 
+				<div>
+					<div class="panel panel-success">
+
+ 						 <div class="panel-heading">
+    						<h3 class="panel-title text-center">Out State Reviews</h3>
+  						 </div>
+
+  						  <div class="panel-body text-center">
+   							<h1>{{vm.businessMetrics.OutStateReview}}</h1> 
+  						  </div>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+
+
+
+	</div>

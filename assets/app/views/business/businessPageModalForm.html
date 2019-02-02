@@ -1,0 +1,25 @@
+
+<div class="modal-header">
+ <button type="button" class="close" ng-click="$close();"><span aria-hidden="true">&times;</span></button>
+ <h4 class="modal-title " id="myModalLabel ">Review and Rating Distribution</h4>
+</div>
+<div class="modal-body ">
+
+<h4> Review Distribution </h4>
+<canvas id="line" class="chart chart-line" chart-data="lineChartData"
+chart-labels="lineChartLabels" chart-series="lineChartSeries" chart-options="lineChartOptions"
+chart-dataset-override="lineChartOverride">
+</canvas>
+
+<h4>Rating Distribution</h4>
+
+<div class="text-center" style="height:300px;width:300px; display: block;
+    margin: 0 auto;">
+<canvas id="pie" class="chart chart-pie"
+  chart-data="pieChartData" chart-labels="pieChartLabels" chart-options="options" width="400px" height="400px">
+</canvas>
+</div>
+ 
+
+
+</div>

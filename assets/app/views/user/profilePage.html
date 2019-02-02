@@ -1,0 +1,164 @@
+ <div class="col-md-12 col-xs-12 col-sm-12">
+  <div class="row">
+   <div class="col-md-12 col-xs-12 col-sm-12">
+    <nav class="navbar navbar-absolute navbar-default">
+
+     <div class="container-fluid">
+
+      <div class="navbar-header">
+       <a ui-sref="userDashboard" class="navbar-left navbar-brand"><img src="img/logo.jpg" height="30px"></a>
+     </div>
+
+     <div>
+        <ul class="nav navbar-nav">
+                <li> <a ng-click="vm.searchResultsAPI(vm.Tags.Restaurants,vm,null)"  > Restaurants </a> </li>
+                <li> <a ng-click="vm.searchResultsAPI(vm.Tags.NightLife,vm,null)"> Night Life </a> </li>
+                <li> <a ng-click="vm.searchResultsAPI(vm.Tags.Shopping,vm,null)"> Shopping </a> </li>
+                <li> <a ng-click="vm.tupleCount()"> Tuple Count </a> </li>
+               
+        </ul> 
+
+              <form class="navbar-form navbar-left" id="navbar-form" ng-keypress="($event.charCode==13)?vm.searchByKeyword(keyword):return">
+                <div class="form-group">
+
+                  <div class="input-group col-xs-9 col-sm-9">
+                    <input type="text" class="form-control" placeholder="Find" aria-describedby="basic-addon1" ng-model="keyword">
+
+                    <span class="input-group-addon" id="basic-addon1">
+                      <a ng-click="vm.searchByKeyword(keyword)">
+                        <span class="glyphicon glyphicon-search"></span>
+                      </a>
+                    </span>
+                  </div>
+                </div>
+              </form>
+
+  <ul class="nav navbar-nav navbar-right">
+    <li class="dropdown">
+     <a class="dropdown-toggle" data-toggle="dropdown" >
+       {{vm.userNameLocalStorage}}<span class="caret" style="color:white"></span>
+     </a>
+     <ul class="dropdown-menu">
+       <li><a ng-click="vm.goToProfilePage()">About Me</a></li>
+       <li><a ui-sref="settings">Settings</a></li>
+       <li ng-if="vm.userDetailsLocalStorage.User_Type_Id==2">
+                      <a ng-click="vm.businessAPI()" class="dashboard-link">Business Details</a>
+        </li>
+       <li><a ng-click="vm.logout()">Log out</a></li>
+     </ul>
+   </li>
+ </ul> 
+</div>
+</div>
+</nav>
+</div>
+</div>
+
+<div class="row" style="margin-bottom:20px">
+  <div>
+    <div class="col-md-offset-1 col-md-2 col-xs-offset-1 col-xs-11 col-sm-offset-1 col-sm-12">
+     <img ng-src="{{vm.userDetails[0].ImageURL || '../../../img/noImage.png' }}"  style="border:2px solid black" height="150px" width="150px"> 
+   </div>
+
+   <div class="container col-md-offset-1 col-md-4 col-xs-12 col-sm12">
+    <h1> {{vm.userDetails[0].FirstName+" "+vm.userDetails[0].LastName}}</h1>
+    <em> {{vm.userDetails[0].City}},{{vm.userDetails[0].State}}</em>
+    <h5>
+      <span class="glyphicon glyphicon-star" style="color:teal"></span>{{vm.userDetails[0].ReviewCount}} <em>Reviews</em>
+    </h5>
+    <strong>Glocaling Since</strong> {{vm.userDetails[0].CreationTime}}
+  </div>
+</div>
+</div>
+
+<div class="row">
+  <div class="col-md-offset-1 col-md-5 col-xs-12 col-sm-12" >
+    <div class="text-left" style="color:red;font-size:40px" ng-if="vm.userDetails[0].Review.length>0"> Reviews</div>
+    <hr>
+   
+    <div dir-paginate="review in vm.userDetails[0].Review|itemsPerPage:3">
+      <img ng-src="{{review.BusinessImageURL || '../../../img/dashboard_1.jpeg' }}" width="80px" height="80px" align="middle" style="margin: 0px 20px" class="pull-left">
+      <strong > <a ui-sref="businessPage({id:review.BusinessID})">{{review.BusinessName}}</a> </strong><br>
+
+      Price Range:<span ng-if="!review.BusinessPriceRange"> <b>Not Applicable</b></span>
+
+        <piggybankingrating ng-if="review.BusinessPriceRange>0" ratingvalue="review.BusinessPriceRange" max="5"></piggybankingrating>
+
+        <br>
+          
+      <div class="line-clamp">
+              <span ng-if="review.BusinessTag[0].TagName"> <b>{{review.BusinessTag[0].TagName}}</b></span>
+              <span ng-if="review.BusinessTag[1].TagName"> <b>,{{review.BusinessTag[1].TagName}}</b></span>
+              <span ng-if="review.BusinessTag[2].TagName"> <b>,{{review.BusinessTag[2].TagName}}</b></span>
+              <span ng-if="review.BusinessTag.length<=0"> <b> No Tags for this Business</b> </span>
+      </div>
+          {{review.BusinessCity}} {{review.BusinessState}} - {{review.BusinessZip}}
+     
+      <h5 style="background-color:lightblue;"> Review </h5>
+      <uib-rating ng-model="review.Rating" max="5" data-readonly="true"></uib-rating>
+      <span class="glyphicon glyphicon-calendar" style="padding: 0 0 0 20px;"></span>
+      <strong style="vertical-align:middle;"> {{review.CreationTime}} </strong>
+      <p class="text-justify">
+        {{review.Text}}
+      </p>
+      <hr>
+    </div>
+
+         <dir-pagination-controls boundary-links="true" direction-links="true">
+         </dir-pagination-controls>    
+
+
+  </div>
+
+
+
+
+  <div class="col-md-offset-1 col-md-5 col-xs-12 col-sm-12" >
+    <div class="text-left" style="color:red;font-size:40px" ng-if="vm.userDetails[0].Review.length>0" > About {{vm.userDetails[0].FirstName+" "+vm.userDetails[0].LastName}}</div>
+    <hr>
+    <div class="text-center" style="font-size:20px;color:#006b5e" ng-if="vm.userDetails[0].Review.length>0"> Rating Distribution</div>
+    <div style="width: 250px;height: 250px;display: block;
+    margin: 0 auto;" >
+        <canvas id="doughnut" class="chart chart-doughnut text-center"
+      chart-data="data" chart-labels="labels">
+        </canvas> 
+    </div>
+    
+    <hr>
+
+    <div>
+      <div class="text-center" style="font-size:20px;color:#006b5e" ng-if="vm.userDetails[0].Review.length>0"> Most Reviewed Business Tags</div>
+      <div  style="display:inline-block;" ng-repeat="topTags in vm.TopTags">
+         &nbsp;&nbsp;<button class="btn btn-info btn-xs"><span class="glyphicon glyphicon-tag"></span>{{topTags.TAG_NAME}}</button>
+      </div>
+      <hr>
+      <br>
+      <div>
+        <div class="text-center" style="font-size:20px;color:#006b5e" ng-if="vm.userDetails[0].Review.length>0"> Parity Rating</div>
+          <canvas id="line" class="chart chart-line" chart-data="lineChartData"
+          chart-labels="labels" chart-series="series" chart-options="options"
+          chart-dataset-override="datasetOverride">
+          </canvas>
+      </div>
+    <!--   <img src="img/dashboard_1.jpeg" width="80px" height="80px" align="middle" style="margin: 0px 20px" class="pull-left">
+      <strong > <a href="#">Mexican Chipotele</a> </strong><br>
+      Price Range:
+      <span class="glyphicon glyphicon-piggy-bank"></span>
+      <span class="glyphicon glyphicon-piggy-bank"></span>
+      <span class="glyphicon glyphicon-piggy-bank"></span>
+      <span class="glyphicon glyphicon-piggy-bank"></span><br>
+      <div class="line-clamp">Vietnamese, Sandwiches</div>
+      Gainesville,Florida - 32608 -->
+      <hr>
+    </div>
+<!-- 
+    <div class="text-center" style="font-size:20px;color:#006b5e" ng-if="vm.userDetails[0].Review.length>0"> Top Reviewed Categories</div>
+    <hr> -->
+
+   <!--  <div class="text-center" style="font-size:20px;color:#006b5e" ng-if="vm.userDetails[0].Review.length>0"> Top Reviewed Cities</div>
+    <hr>
+ -->
+  </div>
+
+</div>
+</div>

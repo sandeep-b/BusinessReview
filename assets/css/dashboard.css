@@ -1,0 +1,50 @@
+#dashboard-container{
+	padding-top: 30px;
+	height: 570px;
+	background-color: #333;
+	background-size: cover;
+	background-position: center center;
+	background-image:url("../img/splash-background.jpg");
+  width: 100%;
+}
+
+#dashboard-navbar{
+  margin-right: 10px;
+}
+
+.dashboard-link{
+  font-weight:bold;
+  color:white;
+  border-radius: 0;
+  border-bottom: 2px solid transparent;
+  padding-bottom: 8px;
+  background-color: transparent;
+}
+
+.nav>li>a:hover{
+  background-color: transparent;
+  border-bottom: 2px solid;
+  color: white;
+}
+
+.nav>li:active{
+  background-color: transparent;
+  border-bottom: 2px solid;
+  color: blue;
+}
+
+.profile-img{
+  margin-right: 5px;
+  float: left;
+  color: white;
+}
+
+.line-clamp {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+

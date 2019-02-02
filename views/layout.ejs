@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <title>My AngularJS App</title>
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="../../../css/dashboard.css">
+  <link rel="stylesheet" type="text/css" href="../../../css/settings.css">
+  <link rel='stylesheet' href='bower_components/angular-loading-bar/build/loading-bar.min.css' type='text/css' media='all' />
+
+
+  <!--Bower Components Starts -->
+  <link href="bower_components/datatables/media/css/jquery.dataTables.min.css" rel="stylesheet" />
+  <link href="bower_components/angular-datatables/dist/css/angular-datatables.min.css" rel="stylesheet" type="text/css" />
+  <link href="bower_components/angular-datatables/dist/plugins/bootstrap/datatables.bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <link href="bower_components/angular-toastr/dist/angular-toastr.css" rel="stylesheet" type="text/css" />
+  <!--Bower Components Ends -->
+  <link rel="stylesheet" href=".../../../css/font-awesome-4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="bower_components/angular-tags/dist/angular-tags-0.2.10.css"/>
+
+
+
+</head>
+<body ng-cloak>
+  <%-body%>
+  <!-- In production use:
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+  -->
+   <!--Bower Components Starts -->
+
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
+  <script src="bower_components/angular/angular.min.js"></script>
+  <script src="bower_components/angular-datatables/dist/angular-datatables.min.js"></script>
+  <script src="bower_components/angular-datatables/dist/plugins/bootstrap/angular-datatables.bootstrap.min.js"></script>
+  <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+  <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+  <script src="bower_components/angular-animate/angular-animate.js"></script>
+  <script src="bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
+  <script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
+  <script src="bower_components/angular-httpi/lib/httpi.js"></script>
+  <script src="bower_components/http/http.min.js"></script>
+  <script src="bower_components/moment/moment.js"></script>
+  <script src="bower_components/angular-moment/angular-moment.js"></script>
+  <script src="bower_components/ng-lodash/build/ng-lodash.min.js"></script>
+  <script src="bower_components/angular-animate/angular-animate.js"></script>
+  <script src="bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
+  <script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
+  <script src="bower_components/angular-httpi/lib/httpi.js"></script>
+  <script src="bower_components/http/http.min.js"></script>
+  <script src="bower_components/angular-route/angular-route.min.js"></script>
+  <script src="bower_components/chart.js/dist/Chart.min.js"></script>
+  <script src="bower_components/angular-chart.js/dist/angular-chart.min.js"></script>
+  <script src="bower_components/angularUtils-pagination/dirPagination.js"></script>
+  <script type="text/javascript" src="bower_components/angular-validation-match/dist/angular-validation-match.min.js"></script>
+  <script type="text/javascript" src="bower_components/flow.js/dist/flow.min.js"></script>
+  <script type="text/javascript" src="bower_components/ng-flow/dist/ng-flow-standalone.min.js"></script>
+  <script type="text/javascript" src="bower_components/ng-flow/dist/ng-flow.min.js"></script>
+  <script type="text/javascript" src="bower_components/ng-file-upload/ng-file-upload-shim.min.js"></script>
+  <script type="text/javascript" src="bower_components/ng-file-upload/ng-file-upload.min.js"></script>
+  <script src="bower_components/ngmap/build/scripts/ng-map.min.js"></script>
+  <script src="http://maps.google.com/maps/api/js"></script>
+  <script type="text/javascript" src="bower_components/angular-tags/dist/angular-tags-0.2.10.js"></script>
+  <script type="text/javascript" src="bower_components/angular-tags/dist/angular-tags-0.2.10-tpls.js"></script>
+  <script type="text/javascript" ></script>
+
+
+
+
+
+  <!--Bower Components Ends -->
+   <!--<script src="lib/angular/angular.js"></script>
+  <script src="lib/angular/angular-route.js"></script>-->
+  <script src="app/app.js"></script>
+
+  <script src="app/scripts/userDashboard/controllers/userDashboardController.js"></script>
+  <script src="app/scripts/userDashboard/services/userDashboardServices.js"></script>
+
+  <script src="app/scripts/business/controllers/businessController.js"></script>
+  <script src="app/scripts/business/services/businessService.js"></script>
+
+  <script src="app/scripts/businessDashboard/controllers/businessDashboardController.js"></script>
+  <script src="app/scripts/businessDashboard/controllers/businessMetricsController.js"></script>
+
+  <script src="app/scripts/businessDashboard/services/businessDashboardService.js"></script>
+
+  <script src="app/scripts/user/services/userServices.js"></script>
+
+  <script src="app/scripts/common/local.storage.js"></script>
+  <script src="app/scripts/common/authenticationService.js"></script>
+
+  <script src="app/scripts/user/controllers/userController.js"></script>
+
+  <script src="app/scripts/user/controllers/searchController.js"></script>
+  <script src="app/scripts/user/controllers/signupController.js"></script>
+
+
+  <script src="app/scripts/settings/controllers/settingsController.js"></script>
+
+  <script src="app/scripts/forgetPassword/controllers/forgetPasswordController.js"></script>
+  <script src="app/scripts/Login/controllers/loginController.js"></script>
+
+  <script src="app/scripts/user/controllers/reviewController.js"></script>
+  <script src="app/scripts/user/services/reviewService.js"></script>
+
+  <script src="app/scripts/config/api/api.js"></script>
+  <script src="app/scripts/config/environment/connections.js"></script>
+  <script src="app/scripts/config/environment/environment.js"></script>
+  <script src="app/scripts/config/routes.js"></script>
+
+  <script type='text/javascript' src='bower_components/angular-loading-bar/build/loading-bar.min.js'></script>
+
+</body>
+</html>
